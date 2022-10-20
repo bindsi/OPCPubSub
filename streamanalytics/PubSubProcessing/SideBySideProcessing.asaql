@@ -1,0 +1,84 @@
+-- Before you begin
+-- 1. Add input: right-click the Inputs folder and select "ASA: Add Input" to prepare your input data.
+-- 2. Add output: right-click the Outputs folder and select "ASA: Add Output" to choose your sink type.
+-- 3. Edit your query below and start testing your ASA job locally.
+-- For more information, please visit: https://docs.microsoft.com/en-us/azure/stream-analytics/quick-create-visual-studio-code
+
+WITH
+PubSubFlattened AS(
+SELECT
+    ih.*,
+    ih.IoTHub.ConnectionDeviceId,
+    payload.PropertyValue.StatusCode.Code AS ValueStatusCode,
+    payload.PropertyValue.StatusCode.Symbol AS ValueStatusCodeSymbol,
+    payload.PropertyName AS PayloadName,
+    payload.PropertyValue.Value AS PayloadValue,
+    payload.PropertyValue.SourceTimestamp AS PayloadSourceTimestamp,
+    payload.PropertyValue.ServerTimestamp AS PayloadServerTimestamp
+FROM
+    IoTHub AS ih
+    CROSS APPLY
+    GetArrayElements(ih.Messages) as msg -- GetArrayElements: https://docs.microsoft.com/en-us/stream-analytics-query/getarrayelements-azure-stream-analytics
+    CROSS APPLY
+    GetRecordProperties(msg.ArrayValue.Payload) AS payload -- GetRecordProperties: https://docs.microsoft.com/en-us/stream-analytics-query/getrecordproperties-azure-stream-analytics
+
+WHERE
+    ih.PublisherId IS NOT NULL --identifier in message for PubSub format, not available in Sample format
+AND
+    ih.MessageType IS NOT NULL --identifier in message for PubSub format, not available in Sample format
+),
+PubSub AS(
+SELECT
+	'PubSub' as MessageFormat,
+	mm.NodeId as NodeId,
+    mm.MachineName as MachineName,
+    NULL AS ApplicationUri,
+    mm.EndpointUrl,
+    PubSubFlattened.ValueStatusCode,
+    PubSubFlattened.ValueStatusCodeSymbol,
+    PubSubFlattened.ConnectionDeviceId AS IoTHubDeviceId,
+    PubSubFlattened.PayloadSourceTimestamp as SourceTimestamp,
+    PubSubFlattened.PayloadValue as Value
+FROM
+    PubSubFlattened
+    LEFT JOIN ReferenceData mm --sample: add reference data based on SignalId from database metadata
+
+    ON PubSubFlattened.PayloadName = mm.SignalId
+),
+Sample AS(
+SELECT
+	'Sample' as MessageFormat,
+    ih.NodeId,
+    mm.MachineName as MachineName,
+    ih.ApplicationUri,
+    ih.EndpointUrl,
+    ih.Value.StatusCode.Code AS ValueStatusCode,
+    ih.Value.StatusCode.Symbol AS ValueStatusCodeSymbol,
+    ih.IoTHub.ConnectionDeviceId AS IoTHubDeviceId,
+    ih.Value.SourceTimestamp,
+    ih.Value.Value
+FROM
+    IoTHub as ih
+    LEFT JOIN ReferenceData mm --sample: add reference data based on EndpointUrl and NodeId from database metadata
+
+    ON(LOWER(ih.EndpointUrl) = LOWER(mm.EndpointUrl) OR LOWER(ih.EndpointUrl) = LOWER(CONCAT(mm.EndpointUrl, '/'))) AND ih.NodeId = mm.NodeId
+WHERE
+    ih.PublisherId IS NULL --identifier in message for PubSub format, not available in Sample format
+),
+EnrichedData AS(
+SELECT
+    *
+FROM
+    PubSub
+UNION
+SELECT
+    *
+FROM
+    Sample
+)
+
+SELECT
+    * INTO [EventHub]
+FROM
+    EnrichedData
+

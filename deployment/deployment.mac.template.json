@@ -1,0 +1,175 @@
+{
+    "$schema-template": "2.0.0",
+    "modulesContent": {
+        "$edgeAgent": {
+            "properties.desired": {
+                "schemaVersion": "1.1",
+                "runtime": {
+                    "type": "docker",
+                    "settings": {
+                        "minDockerVersion": "v1.25",
+                        "loggingOptions": "",
+                        "registryCredentials": {}
+                    }
+                },
+                "systemModules": {
+                    "edgeAgent": {
+                        "type": "docker",
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-agent:1.4",
+                            "createOptions": {}
+                        },
+                        "env": {
+                            "ExperimentalFeatures__Enabled": {
+                                "value": "true"
+                            },
+                            "ExperimentalFeatures__EnableGetLogs": {
+                                "value": "true"
+                            },
+                            "ExperimentalFeatures__EnableUploadLogs": {
+                                "value": "true"
+                            },
+                            "ExperimentalFeatures__EnableMetrics": {
+                                "value": "true"
+                            }
+                        }
+                    },
+                    "edgeHub": {
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always",
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-hub:1.4",
+                            "createOptions": {
+                                "HostConfig": {
+                                    "PortBindings": {
+                                        "5671/tcp": [
+                                            {
+                                                "HostPort": "5671"
+                                            }
+                                        ],
+                                        "8883/tcp": [
+                                            {
+                                                "HostPort": "8883"
+                                            }
+                                        ],
+                                        "443/tcp": [
+                                            {
+                                                "HostPort": "443"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "env": {
+                            "SslProtocols": {
+                                "value": "tls1.2"
+                            },
+                            "UpstreamProtocol": {
+                                "value": "AmqpWs"
+                            }
+                        }
+                    }
+                },
+                "modules": {
+                    "opcpublisher": {
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always",
+                        "startupOrder": 2,
+                        "env": {
+                            "BypassCertVerification": {
+                                "value": "true"
+                            }
+                        },
+                        "settings": {
+                            "image": "mcr.microsoft.com/iotedge/opc-publisher:2.8.3",
+                            "createOptions": {
+                                "Hostname": "opcpublisher",
+                                "Cmd": [
+                                    "--pf=/appdata/config/publisher1.json",
+                                    "--lf=/appdata/publisher.log",
+                                    "--mm=PubSub",
+                                    "--me=Json",
+                                    "--fm=true",
+                                    "--bs=1",
+                                    "--di=20",
+                                    "--aa",
+                                    "--rs=true",
+                                    "--ri=true"
+                                ],
+                                "HostConfig": {
+                                    "Binds": [
+                                        "/Users/Shared/iiotedge:/appdata"
+                                    ],
+                                    "ExtraHosts": [
+                                        "localhost:127.0.0.1"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "opcplc": {
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always",
+                        "startupOrder": 1,
+                        "env": {
+                            "BypassCertVerification": {
+                                "value": "true"
+                            }
+                        },
+                        "settings": {
+                            "image": "mcr.microsoft.com/iotedge/opc-plc:2.5.0",
+                            "createOptions": {
+                                "Hostname": "opcplc",
+                                "Cmd": [
+                                    "--ut",
+                                    "--autoaccept",
+                                    "--to",
+                                    "--sph",
+                                    "--spf /app/config/publisher1.json"
+                                ],
+                                "ExposedPorts": {
+                                    "50000/tcp": {},
+                                    "8080/tcp": {}
+                                },
+                                "HostConfig": {
+                                    "Binds": [
+                                        "/Users/Shared/iiotedge/pki:/app/pki",
+                                        "/Users/Shared/iiotedge/config:/app/config"
+                                    ],
+                                    "PortBindings": {
+                                        "50000/tcp": [
+                                            {
+                                                "HostPort": "50000"
+                                            }
+                                        ],
+                                        "8080/tcp": [
+                                            {
+                                                "HostPort": "8080"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "$edgeHub": {
+            "properties.desired": {
+                "schemaVersion": "1.2",
+                "routes": {
+                    "PublisherToIoTHub": "FROM /messages/modules/opcpublisher INTO $upstream",
+                    "PublisherToEcho": "FROM /messages/modules/opcpublisher INTO BrokeredEndpoint(\"/modules/echo/inputs/input1\")"
+                },
+                "storeAndForwardConfiguration": {
+                    "timeToLiveSecs": 7200
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+[
+    {
+        "SignalId": "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomSignedInt32",
+        "NodeId": "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomSignedInt32",
+        "EndpointUrl": "opc.tcp://opcplc:50000",
+        "MachineName": "EdgeDevice"
+    }
+]

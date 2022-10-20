@@ -1,0 +1,11 @@
+{
+    "Name": "IoTHub",
+    "Type": "Data Stream",
+    "DataSourceType": "Local Input",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "FilePath": "../ReferenceData/IoTHubLocal.json",
+    "ScriptType": "InputMock"
+}

@@ -1,0 +1,150 @@
+[
+    {
+        "NodeId": "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomSignedInt32",
+        "EndpointUrl": "opc.tcp://opcplc:50000/",
+        "Value": {
+            "StatusCode": {
+                "Symbol": "BadNodeIdUnknown",
+                "Code": 2150891520
+            },
+            "SourceTimestamp": "2020-12-16T13:17:37.1289079Z"
+        },
+        "PartitionId": 0,
+        "EventEnqueuedUtcTime": "2021-02-10T08:50:47.0343619Z",
+        "EventProcessedUtcTime": "2021-02-10T08:50:57.0343619Z",
+        "IoTHub": {
+            "MessageId": null,
+            "CorrelationId": "47d524df-7f15-4067-a715-888fba1443db",
+            "ConnectionDeviceId": "Edge-Device",
+            "ConnectionDeviceGenerationId": "637465871902822439",
+            "EnqueuedTime": "2021-02-10T08:50:37.0330000Z",
+            "StreamId": null
+        }
+    },
+    {
+        "MessageId": "5627",
+        "MessageType": "ua-data",
+        "PublisherId": "opc.tcp://opcplc:50000_C9547873",
+        "Messages": [
+            {
+                "DataSetWriterId": "1000",
+                "SequenceNumber": 5627,
+                "MetaDataVersion": {
+                    "MajorVersion": 1,
+                    "MinorVersion": 0
+                },
+                "Timestamp": "2022-10-20T06:46:03.977995Z",
+                "Payload": {
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=StepUp": {
+                        "Value": 63668,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9566094Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9567102Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomSignedInt32": {
+                        "Value": 1833304362,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9567607Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9567851Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomUnsignedInt32": {
+                        "Value": 357869610,
+                        "SourceTimestamp": "2022-10-20T06:46:03.956789Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9568512Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=DipData": {
+                        "Value": -90.48270524660198,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9568686Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9568935Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1": {
+                        "Value": 6376,
+                        "SourceTimestamp": "2022-10-20T06:46:03.313787Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.3138622Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=BadFastUInt1": {
+                        "Value": 6,
+                        "SourceTimestamp": "2022-10-20T06:46:03.3138662Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.3138966Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=SpikeData": {
+                        "Value": -84.43279255020153,
+                        "SourceTimestamp": "2022-10-20T06:46:03.956955Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9569885Z"
+                    }
+                }
+            }
+        ],
+        "EventProcessedUtcTime": "2022-10-20T06:46:04.3838200Z",
+        "PartitionId": 0,
+        "EventEnqueuedUtcTime": "2022-10-20T06:46:04.0420000Z",
+        "IoTHub": {
+            "MessageId": null,
+            "CorrelationId": null,
+            "ConnectionDeviceId": "Edge-Device",
+            "ConnectionDeviceGenerationId": "637980688663136677",
+            "EnqueuedTime": "2022-10-20T06:46:04.0330000Z"
+        }
+    },
+    {
+        "MessageId": "5627",
+        "MessageType": "ua-data",
+        "PublisherId": "opc.tcp://opcplc:50000_C9547873",
+        "Messages": [
+            {
+                "DataSetWriterId": "1000",
+                "SequenceNumber": 5627,
+                "MetaDataVersion": {
+                    "MajorVersion": 1,
+                    "MinorVersion": 0
+                },
+                "Timestamp": "2022-10-20T06:46:03.977995Z",
+                "Payload": {
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=StepUp": {
+                        "Value": 63668,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9566094Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9567102Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomSignedInt32": {
+                        "Value": 1833304362,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9567607Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9567851Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomUnsignedInt32": {
+                        "Value": 357869610,
+                        "SourceTimestamp": "2022-10-20T06:46:03.956789Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9568512Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=DipData": {
+                        "Value": -90.48270524660198,
+                        "SourceTimestamp": "2022-10-20T06:46:03.9568686Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9568935Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1": {
+                        "Value": 6376,
+                        "SourceTimestamp": "2022-10-20T06:46:03.313787Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.3138622Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=BadFastUInt1": {
+                        "Value": 6,
+                        "SourceTimestamp": "2022-10-20T06:46:03.3138662Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.3138966Z"
+                    },
+                    "nsu=http://microsoft.com/Opc/OpcPlc/;s=SpikeData": {
+                        "Value": -84.43279255020153,
+                        "SourceTimestamp": "2022-10-20T06:46:03.956955Z",
+                        "ServerTimestamp": "2022-10-20T06:46:03.9569885Z"
+                    }
+                }
+            }
+        ],
+        "EventProcessedUtcTime": "2022-10-20T06:46:04.3838200Z",
+        "PartitionId": 0,
+        "EventEnqueuedUtcTime": "2022-10-20T06:46:04.0420000Z",
+        "IoTHub": {
+            "MessageId": null,
+            "CorrelationId": null,
+            "ConnectionDeviceId": "Edge-Device",
+            "ConnectionDeviceGenerationId": "637980688663136677",
+            "EnqueuedTime": "2022-10-20T06:46:04.0330000Z"
+        }
+    }
+]

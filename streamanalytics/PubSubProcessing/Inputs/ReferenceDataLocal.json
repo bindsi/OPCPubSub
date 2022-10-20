@@ -1,0 +1,11 @@
+{
+    "Name": "ReferenceData",
+    "Type": "Reference data",
+    "DataSourceType": "Local Input",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8"
+    },
+    "FilePath": "../ReferenceData/MetaDataLocal.json",
+    "ScriptType": "InputMock"
+}

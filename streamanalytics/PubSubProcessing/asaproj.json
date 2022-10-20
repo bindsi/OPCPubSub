@@ -1,0 +1,30 @@
+{
+    "name": "SideBySideProcessing",
+    "startFile": "SideBySideProcessing.asaql",
+    "configurations": [
+        {
+            "filePath": "JobConfig.json",
+            "subType": "JobConfig"
+        },
+        {
+            "filePath": "Inputs/IoTHub.json",
+            "subType": "Input"
+        },
+        {
+            "filePath": "Outputs/EventHub.json",
+            "subType": "Output"
+        },
+        {
+            "filePath": "Inputs/IoTHubLocal.json",
+            "subType": "InputMock"
+        },
+        {
+            "filePath": "Inputs/ReferenceDataLocal.json",
+            "subType": "InputMock"
+        },
+        {
+            "filePath": "Inputs/ReferenceData.json",
+            "subType": "Input"
+        }
+    ]
+}
