@@ -23,15 +23,17 @@ OPC Publisher comes along with the default message format “Samples”, this is
 
 ```json
 [
-    {
-      "NodeId": "http://microsoft.com/Opc/OpcPlc/#s=FastUInt1",
-      "EndpointUrl": "opc.tcp://opcplc:50000/",
-      "DisplayName": "676dbb40-7003-ed11-aebb-3c9c0f14fa7c",
-      "Value": {
-        "Value": 31,
-        "SourceTimestamp": "2022-07-18T08:12:24.8325628Z"
-      }
+  {
+    "NodeId": "nsu=http://microsoft.com/Opc/OpcPlc/;s=RandomUnsignedInt32",
+    "EndpointUrl": "opc.tcp://opcplc:50000/",
+    "ApplicationUri": "urn:OpcPlc:opcplc",
+    "Timestamp": "2022-10-21T11:26:36.064142Z",
+    "Value": {
+      "Value": 1029320596,
+      "SourceTimestamp": "2022-10-21T11:26:35.9594394Z",
+      "ServerTimestamp": "2022-10-21T11:26:35.9594399Z"
     }
+  }
 ]
 ```
 
