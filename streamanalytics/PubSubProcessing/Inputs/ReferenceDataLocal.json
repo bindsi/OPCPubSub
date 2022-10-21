@@ -6,6 +6,6 @@
         "Type": "Json",
         "Encoding": "UTF8"
     },
-    "FilePath": "../ReferenceData/MetaDataLocal.json",
+    "FilePath": "../InputMocks/MetaDataLocal.json",
     "ScriptType": "InputMock"
 }

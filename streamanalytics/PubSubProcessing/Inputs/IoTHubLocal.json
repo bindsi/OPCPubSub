@@ -6,6 +6,6 @@
         "Type": "Json",
         "Encoding": "UTF8"
     },
-    "FilePath": "../ReferenceData/IoTHubLocal.json",
+    "FilePath": "../InputMocks/IoTHubLocal.json",
     "ScriptType": "InputMock"
 }
