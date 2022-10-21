@@ -4,6 +4,17 @@
 
 This repository serves as a showcase to demonstrate the shift from OPC UA Samples to PubSub message format and its impact to underlying cloud processing layers
 
+## OPC Publisher
+
+OPC Publisher is a fully-supported Microsoft product that bridges the gap between industrial assets and the Microsoft Azure cloud. It does so by connecting OPC UA-enabled assets or industrial connectivity software to your Microsoft Azure cloud. It publishes the telemetry data it gathers to Azure IoT Hub in various formats, including IEC62541 OPC UA PubSub standard format (from version 2.6 onwards). OPC Publisher runs on Azure IoT Edge as a Module or on plain Docker as a container. Because it leverages the .NET cross-platform runtime, it runs natively on both Linux and Windows 10.
+
+See [here](https://learn.microsoft.com/en-us/azure/industrial-iot/overview-what-is-opc-publisher) for more details.
+
+## OPC PLC
+
+Implements an OPC-UA server with different nodes generating random data, anomalies and configuration of user defined nodes.
+You can refer to the following [website](https://learn.microsoft.com/en-us/samples/azure-samples/iot-edge-opc-plc/azure-iot-sample-opc-ua-server/) to get more details.
+
 ## Message Formats
 
 OPC Publisher comes along with the default message format “Samples”, this is a non-standardized, simple JSON format. OPC Publisher version 2.6 and above supports a standardized OPC UA JSON format named “PubSub”. By switching the configuration to use this newer, industry-standardized message format, you can benefit from increasing schema stability, future proofing solution, etc.
